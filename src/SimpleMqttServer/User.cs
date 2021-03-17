@@ -1,20 +1,7 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="User.cs" company="Hämmer Electronics">
-//   Copyright (c) 2020 All rights reserved.
-// </copyright>
-// <summary>
-//   The <see cref="User" /> read from the config.json file.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
+using System.Linq;
+using System.Collections.Generic;
 namespace SimpleMqttServer
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    /// <summary>
-    ///     The <see cref="User" /> read from the config.json file.
-    /// </summary>
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class User
     {
         /// <summary>
@@ -26,5 +13,18 @@ namespace SimpleMqttServer
         ///     Gets or sets the password.
         /// </summary>
         public string Password { get; set; }
+    }
+
+    public class UserList : List<User>
+    {
+        public User this[string username]
+        {
+            get => this.FirstOrDefault(i => i.UserName == username);
+            set
+            {
+                var v = this.FirstOrDefault(i => i.UserName == username);
+                v = value;
+            }
+        }
     }
 }

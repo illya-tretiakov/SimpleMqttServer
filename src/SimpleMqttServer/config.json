@@ -1,9 +1,9 @@
 {
-  "Port": 1883,
+  "Port": 11200,
   "Users": [
     {
-      "UserName": "Hans",
-      "Password": "Test"
+      "UserName": "tret",
+      "Password": "tret"
     }
   ]
 }

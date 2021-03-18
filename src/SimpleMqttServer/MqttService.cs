@@ -43,8 +43,10 @@ namespace SimpleMqttServer
                 switch (cmd)
                 {
                     case "info":
-
-                        var m = $"{_server.}";
+                        var ses = await _server.GetClientStatusAsync();
+                        string m = "";
+                        if (ses.Any())
+                            m = string.Join("\t\a", ses.Select(i => i.Endpoint));
 
                         Console.WriteLine(m);
                         Console.WriteLine("Kek.");
@@ -53,6 +55,7 @@ namespace SimpleMqttServer
 
                         break;
                     default:
+                        
                         var many = cmd.Split(" ");
                         if(many.Any())
                         {

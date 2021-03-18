@@ -2,8 +2,12 @@
   "Port": 11200,
   "Users": [
     {
-      "UserName": "tret",
-      "Password": "tret"
+      "UserName": "devmob",
+      "Password": "devmob"
+    },
+    {
+      "UserName": "dev1",
+      "Password": "dev1"
     }
   ]
 }

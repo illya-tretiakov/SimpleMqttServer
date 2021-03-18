@@ -30,7 +30,7 @@ namespace SimpleMqttServer
                 .CreateLogger();
 
             var srv = new MqttService();
-            srv.Run();
+            srv.Run().RunSynchronously();
             Console.WriteLine("Server stopped.");
             //ProcessCommands();
 

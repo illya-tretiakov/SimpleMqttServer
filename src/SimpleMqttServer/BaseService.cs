@@ -38,12 +38,12 @@ namespace SimpleMqttServer
 
             var msg = context.ApplicationMessage;
 
-            var payload = msg?.ConvertPayloadToString() ?? string.Empty;
+            var payload = $"\aTopic: {msg.Topic};\tMsg:{msg?.ConvertPayloadToString() ?? string.Empty}";
 
             Logger.Information(
                 "Message: ClientId = {clientId}, Topic = {topic}, Payload = {payload}, QoS = {qos}, Retain-Flag = {retainFlag}",
                 context.ClientId,
-                msg?.Topic,
+                "KS.LOG",
                 payload,
                 msg?.QualityOfServiceLevel,
                 msg?.Retain);

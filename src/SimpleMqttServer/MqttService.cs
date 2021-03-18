@@ -1,21 +1,28 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MQTTnet;
 using MQTTnet.Server;
 using MQTTnet.Client.Publishing;
+using System;
+using System.Linq;
 
 namespace SimpleMqttServer
 {
-    public class MqttService : BaseService, IMqttService
+    public class MqttService : BaseService
     {
         private IMqttServer _server;
 
         public MqttService()
         {
             _server = new MqttFactory().CreateMqttServer();
-            
         }
 
+        public async Task Run()
+        {
+            var opts = MqttHelpers.GetOptionsBuilder().Build();
+            await _server.StartAsync(opts);
+
+            await ProcessCommands();
+        }
 
         public async Task<MqttClientPublishResult> PublishAsync(string topic, string message)
         {
@@ -27,13 +34,38 @@ namespace SimpleMqttServer
             return publishResult;
             
         }
-
-        public async void Run()
+        public async Task ProcessCommands()
         {
-            var opts = MqttHelpers.GetOptionsBuilder().Build();
+            Console.WriteLine($"Server started.\n");
+            string cmd;
+            while ((cmd = Console.ReadLine()) != "exit")
+            {
+                switch (cmd)
+                {
+                    case "info":
 
-            await _server.StartAsync(opts);
+                        var m = $"{_server.}";
 
+                        Console.WriteLine(m);
+                        Console.WriteLine("Kek.");
+                        break;
+                    case "1":
+
+                        break;
+                    default:
+                        var many = cmd.Split(" ");
+                        if(many.Any())
+                        {
+                            if(many[0] == "pub")
+                            {
+                                var res = await PublishAsync(many[1], many[2]);
+                                Console.WriteLine(res.ReasonString);
+                            }
+                        }
+                        break;
+                }
+
+            }
         }
     }
 }

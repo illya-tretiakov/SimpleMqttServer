@@ -16,6 +16,7 @@ namespace SimpleMqttServer
         private static Action<MqttServerClientConnectedEventArgs> ClientConnectionHandler => clientConn =>
         {
             //TODO:
+            
             Console.WriteLine($"Connected. Client ID: {clientConn.ClientId}");
         };
 
@@ -30,42 +31,10 @@ namespace SimpleMqttServer
 
             var srv = new MqttService();
             srv.Run();
-            //MqttServer mqttServer = default;
-            //mqttServer.UseClientConnectedHandler(ClientConnectionHandler);
-            //mqttServer.UseApplicationMessageReceivedHandler(async mesHandler =>
-            //    {
-            //        var m = mesHandler.ApplicationMessage;
-                
-            //        string cliMessage = $"Message from client: {mesHandler.ClientId}\n" +
-            //        $"Payload: {m.ConvertPayloadToString()}\n" +
-            //        $"Message: {m.TopicAlias}";
-                
+            Console.WriteLine("Server stopped.");
+            //ProcessCommands();
 
-            //        Console.WriteLine(cliMessage);
-            //    });
-            //mqttServer.StartAsync(optionsBuilder.Build());
             
-            Console.WriteLine($"Server started.\n");
-
-            string cmd = string.Empty;
-            while((cmd = Console.ReadLine()) != "ex")
-            {
-
-                switch (cmd)
-                {
-                    case "info":
-                        Console.WriteLine("Kek.");
-                        break;
-                    case "1":
-                        
-                        break;
-                    default:
-                        break;
-                }
-
-            }
         }
-        
-        
     }
 }

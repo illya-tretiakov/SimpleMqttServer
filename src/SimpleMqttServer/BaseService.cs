@@ -65,10 +65,10 @@ namespace SimpleMqttServer
             if (showPassword)
             {
                 var msg = $"New connection:\n" +
-                    $"ClientId = {context.ClientId}, " +
-                    $"Endpoint = {context.Endpoint}, " +
-                    $"Username = {context.Username}, " +
-                    $"Password = {context.Password}, " +
+                    $"ClientId = {context.ClientId},\n" +
+                    $"Endpoint = {context.Endpoint},\n" +
+                    $"Username = {context.Username},\n" +
+                    $"Password = {context.Password},\n" +
                     $"CleanSession = {context.CleanSession}";
                 Console.WriteLine(msg);
                 Logger.Information(msg);
@@ -76,9 +76,9 @@ namespace SimpleMqttServer
             else
             {
                 var msg = $"New connection:\n" +
-                    $"ClientId = {context.ClientId}, " +
-                    $"Endpoint = {context.Endpoint}, " +
-                    $"Username = {context.Username}, " +
+                    $"ClientId = {context.ClientId},\n" +
+                    $"Endpoint = {context.Endpoint},\n" +
+                    $"Username = {context.Username},\n" +
                     $"CleanSession = {context.CleanSession}";
                 Console.WriteLine(msg);
                 Logger.Information(msg);

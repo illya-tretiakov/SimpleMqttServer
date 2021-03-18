@@ -4,20 +4,12 @@
     {
       "UserName": "iot1",
       "Password": "pwd1",
-      "UserProperties": [
-        {
-          "kind": "iot"
-        }
-      ]
+      "Kind": "iot"
     },
     {
       "UserName": "iot2",
-      "Password": "iot2",
-      "UserProperties": [
-        {
-          "kind": "iot"
-        }
-      ]
+      "Password": "pwd2",
+      "Kind": "iot"
     }
   ]
 }

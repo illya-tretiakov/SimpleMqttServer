@@ -17,20 +17,11 @@ namespace SimpleMqttServer
         /// <summary>
         /// user props (string key, string val)
         /// </summary>
-        public Dictionary<string, string> UserProperties { get; set; }
+        public string Kind { get; set; } = "iot";
     }
     public static class UserExtensions
     {
-        public static bool IsIot(this User user)
-        {
-            if (user?.UserProperties is null)
-                return false;
-
-            var props = user.UserProperties;
-
-            return props.Any() && props.ContainsKey("kind") && props["kind"] == "iot";   
-
-        }
+        public static bool IsIot(this User user) => user is not null && user.Kind == "iot";
     }
     public class UserList : List<User>
     {

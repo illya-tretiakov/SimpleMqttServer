@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -36,10 +37,15 @@ namespace SimpleMqttServer
                 rollingInterval: RollingInterval.Day)
                 .WriteTo.Console()
                 .CreateLogger();
-
+            Stopwatch sw = new Stopwatch();
             var srv = new MqttService();
-            srv.Run().RunSynchronously();
-            Console.WriteLine("Server stopped.");
+            sw.Start();
+            srv.Run().ContinueWith(r =>
+            {
+                
+                Console.WriteLine("Server stopped.");
+                Console.WriteLine($"Time from start: {sw.Elapsed}");
+            });
             //ProcessCommands();
 
             

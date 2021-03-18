@@ -27,7 +27,7 @@ namespace SimpleMqttServer
     {
         public User this[string username]
         {
-            get => this.FirstOrDefault(i => i.UserName == username) ?? this.FirstOrDefault();
+            get => this.FirstOrDefault(i => i.UserName == username);
             set
             {
                 var v = this.FirstOrDefault(i => i.UserName == username);

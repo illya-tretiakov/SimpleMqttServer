@@ -10,6 +10,27 @@
       "UserName": "iot2",
       "Password": "pwd2",
       "Kind": "iot"
+    },
+    {
+      "UserName": "iot3",
+      "Password": "pwd3",
+      "Kind": "iot"
+    },
+    {
+      "UserName": "iot4",
+      "Password": "pwd4",
+      "Kind": "iot"
+    },
+    {
+      "UserName": "iot5",
+      "Password": "pwd5",
+      "Kind": "iot"
+    },
+    {
+      "UserName": "iot6",
+      "Password": "pwd6",
+      "Kind": "iot"
     }
+
   ]
 }

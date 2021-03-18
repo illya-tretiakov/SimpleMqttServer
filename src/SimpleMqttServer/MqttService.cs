@@ -26,7 +26,7 @@ namespace SimpleMqttServer
 
         public async Task<MqttClientPublishResult> PublishAsync(string topic, string message)
         {
-            var publishResult = await _server.PublishAsync((b) => b
+            var publishResult = await _server.PublishAsync(b => b
                 .WithTopic(topic)
                 .WithUserProperty("kind", "iot")
                 .WithPayload(message));
@@ -43,26 +43,26 @@ namespace SimpleMqttServer
                 switch (cmd)
                 {
                     case "info":
-                        var ses = await _server.GetClientStatusAsync();
+                        var ses = await _server.GetRetainedApplicationMessagesAsync();
                         string m = "";
                         if (ses.Any())
-                            m = string.Join("\t\a", ses.Select(i => i.Endpoint));
+                            m = string.Join("\n", ses.Select(i => $"Topic:\t{i.Topic}\tPayload:{i.ConvertPayloadToString()}"));
 
                         Console.WriteLine(m);
                         Console.WriteLine("Kek.");
                         break;
-                    case "1":
-
+                    case "list":
+                        var re = await _server.PublishAsync("KS.LOG",
+                            string.Join('\n',MqttHelpers.Users.Select(i => $"{i.UserName}")));
                         break;
                     default:
-                        
                         var many = cmd.Split(" ");
                         if(many.Any())
                         {
                             if(many[0] == "pub")
                             {
                                 var res = await PublishAsync(many[1], many[2]);
-                                Console.WriteLine(res.ReasonString);
+                                Console.WriteLine(res.ReasonCode);
                             }
                         }
                         break;

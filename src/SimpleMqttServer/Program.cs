@@ -13,6 +13,8 @@ namespace SimpleMqttServer
 {
     public class Program
     {
+        private const string ARG_PORT = "port";
+
         private static Action<MqttServerClientConnectedEventArgs> ClientConnectionHandler => clientConn =>
         {
             //TODO:
@@ -20,8 +22,14 @@ namespace SimpleMqttServer
             Console.WriteLine($"Connected. Client ID: {clientConn.ClientId}");
         };
 
-        public static void Main()
+        public static void Main(string[] args)
         {
+            if (args.Any())
+                if (args.Any(i => i.StartsWith(ARG_PORT)))
+                    if (int.TryParse(args.FirstOrDefault(i => i.StartsWith("port")).Skip(ARG_PORT.Length).ToString(), out int port))
+                        MqttHelpers.Port = port;
+
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File(Path.Combine(Directory.GetCurrentDirectory(), "MqttServerLog.txt"),

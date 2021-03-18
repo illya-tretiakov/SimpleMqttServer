@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.IO;
 using MQTTnet.Protocol;
 using MQTTnet.Server;
@@ -9,11 +11,17 @@ namespace SimpleMqttServer
     public class MqttHelpers : BaseService
     {
         private static Config _config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "config.json")));
+        public static int? Port { get; set; } = null;
+        public static new UserList Users
+        {
+            get => _config?.Users;
+            set => _config.Users = value;
+        }
 
         public static MqttServerOptionsBuilder GetOptionsBuilder()
             => new MqttServerOptionsBuilder()
                 .WithDefaultEndpoint()
-                .WithDefaultEndpointPort(_config.Port)
+                .WithDefaultEndpointPort(Port ?? _config.Port)
                 .WithConnectionValidator(ConnectionValidator)
                 .WithSubscriptionInterceptor(SubscriptionInterceptor)
                 .WithApplicationMessageInterceptor(MessageInterceptor);
@@ -28,6 +36,9 @@ namespace SimpleMqttServer
                 LogMessage(c, true);
                 return;
             }
+
+            if (!Users.Any(i => i.UserName == c.Username))
+                Users.Add(currentUser);
 
             if (c.Username != currentUser.UserName)
             {
@@ -50,6 +61,7 @@ namespace SimpleMqttServer
         private static Action<MqttSubscriptionInterceptorContext> SubscriptionInterceptor => c =>
         {
             c.AcceptSubscription = true;
+            
             LogMessage(c, true);
         };
 
@@ -59,6 +71,7 @@ namespace SimpleMqttServer
         private static Action<MqttApplicationMessageInterceptorContext> MessageInterceptor => c =>
         {
             c.AcceptPublish = true;
+            
             LogMessage(c);
         };
     }

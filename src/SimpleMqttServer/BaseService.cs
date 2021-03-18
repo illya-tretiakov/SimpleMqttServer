@@ -8,6 +8,7 @@ namespace SimpleMqttServer
     public class BaseService
     {
         protected static readonly ILogger Logger = Log.ForContext<BaseService>();
+        protected static UserList Users { get; set; }
 
         /// <summary> 
         ///     Logs the message from the MQTT subscription interceptor context. 

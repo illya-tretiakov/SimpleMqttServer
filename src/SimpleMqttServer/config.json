@@ -2,12 +2,22 @@
   "Port": 11200,
   "Users": [
     {
-      "UserName": "devmob",
-      "Password": "devmob"
+      "UserName": "iot1",
+      "Password": "pwd1",
+      "UserProperties": [
+        {
+          "kind": "iot"
+        }
+      ]
     },
     {
-      "UserName": "dev1",
-      "Password": "dev1"
+      "UserName": "iot2",
+      "Password": "iot2",
+      "UserProperties": [
+        {
+          "kind": "iot"
+        }
+      ]
     }
   ]
 }
